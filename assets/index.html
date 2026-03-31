@@ -263,10 +263,10 @@
             </div>
             <div class="sheet-content">
                 <div class="font-categories">
-                    <button class="cat-btn active">Default</button>
-                    <button class="cat-btn">Hindi (Unicode)</button>
-                    <button class="cat-btn">Legacy (KrutiDev)</button>
-                    <button class="cat-btn">My Fonts</button>
+                    <button class="cat-btn active" onclick="populateFonts('Default')">Default</button>
+                    <button class="cat-btn" onclick="populateFonts('Hindi (Unicode)')">Hindi (Unicode)</button>
+                    <button class="cat-btn" onclick="populateFonts('Legacy (KrutiDev)')">Legacy (KrutiDev)</button>
+                    <button class="cat-btn" onclick="populateFonts('My Fonts')">My Fonts</button>
                 </div>
                 <div class="font-grid" id="font-list">
                     <!-- Fonts will be injected here -->
@@ -295,6 +295,62 @@
                         <input type="color" id="color-input" onchange="applyColor(this.value)">
                         <span>Custom Hex</span>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-sheet" id="style-sheet">
+            <div class="sheet-header">
+                <div class="handle"></div>
+                <h4>Text Style</h4>
+            </div>
+            <div class="sheet-content">
+                <div class="style-grid">
+                    <button class="style-btn" onclick="applyStyle('bold')"><b>B</b></button>
+                    <button class="style-btn" onclick="applyStyle('italic')"><i>I</i></button>
+                    <button class="style-btn" onclick="applyStyle('underline')"><u>U</u></button>
+                </div>
+                <div class="slider-group">
+                    <label>Font Size</label>
+                    <input type="range" min="10" max="300" value="80" oninput="updateFontSize(this.value)">
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-sheet" id="effects-sheet">
+            <div class="sheet-header">
+                <div class="handle"></div>
+                <h4>Effects</h4>
+            </div>
+            <div class="sheet-content">
+                <div class="effect-row">
+                    <span>Shadow</span>
+                    <div class="switch" onclick="toggleEffect('shadow', this)"></div>
+                </div>
+                <div class="effect-row">
+                    <span>Stroke</span>
+                    <div class="switch" onclick="toggleEffect('stroke', this)"></div>
+                </div>
+                <div class="effect-row">
+                    <span>Background</span>
+                    <div class="switch" onclick="toggleEffect('bg', this)"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-sheet" id="stickers-sheet">
+            <div class="sheet-header">
+                <div class="handle"></div>
+                <h4>Stickers</h4>
+            </div>
+            <div class="sheet-content">
+                <div class="sticker-grid">
+                    <div class="sticker-item" onclick="addStickerAsset('🔥')">🔥</div>
+                    <div class="sticker-item" onclick="addStickerAsset('❤️')">❤️</div>
+                    <div class="sticker-item" onclick="addStickerAsset('✨')">✨</div>
+                    <div class="sticker-item" onclick="addStickerAsset('👑')">👑</div>
+                    <div class="sticker-item" onclick="addStickerAsset('🚀')">🚀</div>
+                    <div class="sticker-item" onclick="addStickerAsset('🎨')">🎨</div>
                 </div>
             </div>
         </div>
