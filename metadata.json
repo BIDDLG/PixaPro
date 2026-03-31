@@ -1,0 +1,5 @@
+{
+  "name": "PixelLab Pro Modern",
+  "description": "A high-end modern text-on-image editor with Hindi legacy font support and glassmorphism UI.",
+  "requestFramePermissions": ["camera", "microphone", "geolocation"]
+}

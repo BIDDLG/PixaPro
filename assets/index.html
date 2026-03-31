@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PixelLab Pro - Modern Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fabric.js for Canvas Manipulation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="screen active">
+        <div class="splash-content">
+            <div class="logo-container">
+                <div class="logo-glow"></div>
+                <i data-lucide="layers" class="splash-logo"></i>
+            </div>
+            <h1 class="splash-title">PIXEL<span>LAB</span></h1>
+            <p class="splash-subtitle">PRO EDITION</p>
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!-- Home Screen -->
+    <div id="home-screen" class="screen">
+        <div class="header">
+            <div class="user-info">
+                <div class="avatar">RK</div>
+                <div>
+                    <p class="welcome-text">Welcome back,</p>
+                    <p class="user-name">Creative Mind</p>
+                </div>
+            </div>
+            <button class="icon-btn" onclick="showScreen('settings-screen')">
+                <i data-lucide="settings"></i>
+            </button>
+        </div>
+
+        <div class="dashboard">
+            <div class="main-card" onclick="showScreen('new-project-screen')">
+                <div class="card-content">
+                    <i data-lucide="plus-circle" class="card-icon"></i>
+                    <h3>New Project</h3>
+                    <p>Start from scratch</p>
+                </div>
+                <div class="card-accent"></div>
+            </div>
+
+            <div class="grid-container">
+                <div class="sub-card" onclick="openGallery()">
+                    <i data-lucide="image"></i>
+                    <p>From Gallery</p>
+                </div>
+                <div class="sub-card" onclick="showScreen('help-screen')">
+                    <i data-lucide="help-circle"></i>
+                    <p>Tutorials</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="recent-projects">
+            <div class="section-header">
+                <h4>Recent Projects</h4>
+                <button class="text-btn">View All</button>
+            </div>
+            <div class="projects-list" id="recent-list">
+                <div class="empty-state">
+                    <i data-lucide="folder-open"></i>
+                    <p>No projects yet</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="fab-container">
+            <button class="fab" onclick="showScreen('new-project-screen')">
+                <i data-lucide="plus"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- New Project Screen -->
+    <div id="new-project-screen" class="screen">
+        <div class="top-bar">
+            <button class="icon-btn" onclick="showScreen('home-screen')">
+                <i data-lucide="chevron-left"></i>
+            </button>
+            <h2>New Project</h2>
+            <div style="width: 40px;"></div>
+        </div>
+        <div class="content">
+            <div class="preset-grid">
+                <div class="preset-item active" onclick="setPreset(1080, 1080, this)">
+                    <i data-lucide="square"></i>
+                    <p>Instagram Post</p>
+                    <span>1080 x 1080</span>
+                </div>
+                <div class="preset-item" onclick="setPreset(1080, 1920, this)">
+                    <i data-lucide="smartphone"></i>
+                    <p>Story / Reel</p>
+                    <span>1080 x 1920</span>
+                </div>
+                <div class="preset-item" onclick="setPreset(1280, 720, this)">
+                    <i data-lucide="youtube"></i>
+                    <p>YouTube Thumbnail</p>
+                    <span>1280 x 720</span>
+                </div>
+                <div class="preset-item" onclick="setPreset(1920, 1080, this)">
+                    <i data-lucide="monitor"></i>
+                    <p>Wallpaper</p>
+                    <span>1920 x 1080</span>
+                </div>
+            </div>
+            
+            <div class="custom-size">
+                <h4>Custom Size</h4>
+                <div class="input-row">
+                    <input type="number" id="custom-w" placeholder="Width" value="1080">
+                    <span>x</span>
+                    <input type="number" id="custom-h" placeholder="Height" value="1080">
+                </div>
+            </div>
+
+            <button class="primary-btn" onclick="startEditor()">Create Project</button>
+        </div>
+    </div>
+
+    <!-- Editor Screen -->
+    <div id="editor-screen" class="screen">
+        <div class="editor-top-bar">
+            <div class="left-tools">
+                <button class="icon-btn" onclick="confirmExit()">
+                    <i data-lucide="x"></i>
+                </button>
+                <div class="divider"></div>
+                <button class="icon-btn" onclick="undo()">
+                    <i data-lucide="undo-2"></i>
+                </button>
+                <button class="icon-btn" onclick="redo()">
+                    <i data-lucide="redo-2"></i>
+                </button>
+            </div>
+            <div class="right-tools">
+                <button class="icon-btn" onclick="toggleLayers()">
+                    <i data-lucide="layers"></i>
+                </button>
+                <button class="icon-btn" onclick="toggleGrid()">
+                    <i data-lucide="grid-3x3"></i>
+                </button>
+                <button class="primary-btn-sm" onclick="showExport()">
+                    <i data-lucide="download"></i>
+                    <span>Export</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="canvas-container" id="canvas-wrapper">
+            <canvas id="main-canvas"></canvas>
+            <div id="grid-overlay" class="grid-hidden"></div>
+            
+            <!-- Floating Zoom Indicator -->
+            <div class="zoom-indicator">100%</div>
+        </div>
+
+        <!-- Bottom Toolbar -->
+        <div class="bottom-toolbar">
+            <div class="tool-tabs">
+                <button class="tool-tab active" onclick="switchTool('text')">
+                    <i data-lucide="type"></i>
+                    <span>Text</span>
+                </button>
+                <button class="tool-tab" onclick="switchTool('image')">
+                    <i data-lucide="image"></i>
+                    <span>Image</span>
+                </button>
+                <button class="tool-tab" onclick="switchTool('shapes')">
+                    <i data-lucide="shapes"></i>
+                    <span>Shapes</span>
+                </button>
+                <button class="tool-tab" onclick="switchTool('bg')">
+                    <i data-lucide="palette"></i>
+                    <span>Background</span>
+                </button>
+            </div>
+
+            <!-- Contextual Tool Panels -->
+            <div class="tool-panel" id="text-panel">
+                <div class="scroll-row">
+                    <button class="panel-item" onclick="addText()">
+                        <i data-lucide="plus"></i>
+                        <span>Add Text</span>
+                    </button>
+                    <div class="divider-v"></div>
+                    <button class="panel-item" onclick="openBottomSheet('font-sheet')">
+                        <i data-lucide="font"></i>
+                        <span>Font</span>
+                    </button>
+                    <button class="panel-item" onclick="openBottomSheet('color-sheet')">
+                        <i data-lucide="droplet"></i>
+                        <span>Color</span>
+                    </button>
+                    <button class="panel-item" onclick="openBottomSheet('style-sheet')">
+                        <i data-lucide="bold"></i>
+                        <span>Style</span>
+                    </button>
+                    <button class="panel-item" onclick="openBottomSheet('effects-sheet')">
+                        <i data-lucide="sparkles"></i>
+                        <span>Effects</span>
+                    </button>
+                    <button class="panel-item" onclick="openBottomSheet('spacing-sheet')">
+                        <i data-lucide="align-justify"></i>
+                        <span>Spacing</span>
+                    </button>
+                    <button class="panel-item" onclick="openBottomSheet('3d-sheet')">
+                        <i data-lucide="box"></i>
+                        <span>3D Text</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="tool-panel hidden" id="image-panel">
+                <div class="scroll-row">
+                    <button class="panel-item" onclick="importImage()">
+                        <i data-lucide="upload"></i>
+                        <span>Import</span>
+                    </button>
+                    <button class="panel-item" onclick="addSticker()">
+                        <i data-lucide="smile"></i>
+                        <span>Stickers</span>
+                    </button>
+                    <button class="panel-item" onclick="cropImage()">
+                        <i data-lucide="crop"></i>
+                        <span>Crop</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Sheets -->
+        <div class="bottom-sheet-overlay" id="sheet-overlay" onclick="closeBottomSheet()"></div>
+        
+        <div class="bottom-sheet" id="font-sheet">
+            <div class="sheet-header">
+                <div class="handle"></div>
+                <h4>Select Font</h4>
+            </div>
+            <div class="sheet-content">
+                <div class="font-categories">
+                    <button class="cat-btn active">Default</button>
+                    <button class="cat-btn">Hindi (Unicode)</button>
+                    <button class="cat-btn">Legacy (KrutiDev)</button>
+                    <button class="cat-btn">My Fonts</button>
+                </div>
+                <div class="font-grid" id="font-list">
+                    <!-- Fonts will be injected here -->
+                </div>
+                <button class="upload-btn" onclick="uploadFont()">
+                    <i data-lucide="plus"></i> Add Custom Font
+                </button>
+            </div>
+        </div>
+
+        <div class="bottom-sheet" id="color-sheet">
+            <div class="sheet-header">
+                <div class="handle"></div>
+                <h4>Color & Gradient</h4>
+            </div>
+            <div class="sheet-content">
+                <div class="color-tabs">
+                    <button class="color-tab active" onclick="switchColorMode('solid')">Solid</button>
+                    <button class="color-tab" onclick="switchColorMode('gradient')">Gradient</button>
+                </div>
+                <div class="color-picker-container">
+                    <div class="preset-colors" id="preset-colors">
+                        <!-- Colors injected here -->
+                    </div>
+                    <div class="custom-color-row">
+                        <input type="color" id="color-input" onchange="applyColor(this.value)">
+                        <span>Custom Hex</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Layer Panel -->
+        <div class="layer-panel" id="layer-panel">
+            <div class="layer-header">
+                <h4>Layers</h4>
+                <button class="icon-btn" onclick="toggleLayers()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="layer-list" id="layer-list">
+                <!-- Layers injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Screen -->
+    <div id="export-screen" class="screen">
+        <div class="top-bar">
+            <button class="icon-btn" onclick="hideExport()">
+                <i data-lucide="chevron-left"></i>
+            </button>
+            <h2>Export Image</h2>
+            <div style="width: 40px;"></div>
+        </div>
+        <div class="export-preview-container">
+            <div id="export-preview"></div>
+        </div>
+        <div class="export-options">
+            <div class="option-group">
+                <label>Format</label>
+                <div class="toggle-group">
+                    <button class="toggle-btn active" onclick="setExportFormat('png')">PNG</button>
+                    <button class="toggle-btn" onclick="setExportFormat('jpg')">JPG</button>
+                </div>
+            </div>
+            <div class="option-group">
+                <label>Quality</label>
+                <div class="toggle-group">
+                    <button class="toggle-btn" onclick="setExportQuality('medium')">Medium</button>
+                    <button class="toggle-btn active" onclick="setExportQuality('high')">Ultra HD</button>
+                </div>
+            </div>
+            
+            <div class="action-row">
+                <button class="secondary-btn" onclick="shareProject()">
+                    <i data-lucide="share-2"></i> Share
+                </button>
+                <button class="primary-btn" onclick="saveToGallery()">
+                    <i data-lucide="download"></i> Save to Gallery
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Screen -->
+    <div id="settings-screen" class="screen">
+        <div class="top-bar">
+            <button class="icon-btn" onclick="showScreen('home-screen')">
+                <i data-lucide="chevron-left"></i>
+            </button>
+            <h2>Settings</h2>
+            <div style="width: 40px;"></div>
+        </div>
+        <div class="settings-list">
+            <div class="setting-item">
+                <div class="setting-info">
+                    <i data-lucide="moon"></i>
+                    <span>Dark Mode</span>
+                </div>
+                <div class="switch active"></div>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <i data-lucide="magnet"></i>
+                    <span>Auto Snap</span>
+                </div>
+                <div class="switch active"></div>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <i data-lucide="languages"></i>
+                    <span>Hindi Auto-Convert</span>
+                </div>
+                <div class="switch active"></div>
+            </div>
+            <div class="setting-item" onclick="clearCache()">
+                <div class="setting-info">
+                    <i data-lucide="trash-2"></i>
+                    <span>Clear Cache</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Screen -->
+    <div id="help-screen" class="screen">
+        <div class="top-bar">
+            <button class="icon-btn" onclick="showScreen('home-screen')">
+                <i data-lucide="chevron-left"></i>
+            </button>
+            <h2>Help & About</h2>
+            <div style="width: 40px;"></div>
+        </div>
+        <div class="help-content">
+            <div class="about-card">
+                <i data-lucide="layers" class="about-logo"></i>
+                <h3>PixelLab Pro</h3>
+                <p>Version 2.0.0 (Modern Edition)</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h5>How to add Hindi text?</h5>
+                    <p>Just type in Hindi normally. If you select a legacy font like KrutiDev, the app will automatically convert it for you.</p>
+                </div>
+                <div class="faq-item">
+                    <h5>Where are my projects saved?</h5>
+                    <p>Projects are saved in your internal storage. Exported images go to your Gallery.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dialogs -->
+    <div id="confirm-dialog" class="dialog-overlay">
+        <div class="dialog">
+            <h4>Unsaved Changes</h4>
+            <p>Are you sure you want to exit? Your progress will be lost.</p>
+            <div class="dialog-actions">
+                <button class="text-btn" onclick="closeDialog()">Cancel</button>
+                <button class="danger-btn" onclick="exitEditor()">Exit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
