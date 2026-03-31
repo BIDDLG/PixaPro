@@ -8,7 +8,7 @@
     <!-- Fabric.js for Canvas Manipulation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
 
@@ -17,7 +17,7 @@
         <div class="splash-content">
             <div class="logo-container">
                 <div class="logo-glow"></div>
-                <i data-lucide="layers" class="splash-logo"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="splash-logo"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
             </div>
             <h1 class="splash-title">PIXEL<span>LAB</span></h1>
             <p class="splash-subtitle">PRO EDITION</p>
@@ -36,48 +36,52 @@
                 </div>
             </div>
             <button class="icon-btn" onclick="showScreen('settings-screen')">
-                <i data-lucide="settings"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
             </button>
         </div>
 
-        <div class="dashboard">
-            <div class="main-card" onclick="showScreen('new-project-screen')">
-                <div class="card-content">
-                    <i data-lucide="plus-circle" class="card-icon"></i>
-                    <h3>New Project</h3>
-                    <p>Start from scratch</p>
+        <div class="content">
+            <div class="dashboard">
+                <div class="main-card" onclick="showScreen('new-project-screen')">
+                    <div class="card-icon-bg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                    </div>
+                    <div class="card-content">
+                        <h3>New Project</h3>
+                        <p>Start from scratch</p>
+                    </div>
+                    <div class="card-accent"></div>
                 </div>
-                <div class="card-accent"></div>
+
+                <div class="grid-container">
+                    <div class="sub-card" onclick="openGallery()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                        <p>From Gallery</p>
+                    </div>
+                    <div class="sub-card" onclick="showScreen('help-screen')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12" y1="17" y2="17"/></svg>
+                        <p>Tutorials</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="grid-container">
-                <div class="sub-card" onclick="openGallery()">
-                    <i data-lucide="image"></i>
-                    <p>From Gallery</p>
+            <div class="recent-projects">
+                <div class="section-header">
+                    <h4>Recent Projects</h4>
+                    <button class="text-btn">View All</button>
                 </div>
-                <div class="sub-card" onclick="showScreen('help-screen')">
-                    <i data-lucide="help-circle"></i>
-                    <p>Tutorials</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="recent-projects">
-            <div class="section-header">
-                <h4>Recent Projects</h4>
-                <button class="text-btn">View All</button>
-            </div>
-            <div class="projects-list" id="recent-list">
-                <div class="empty-state">
-                    <i data-lucide="folder-open"></i>
-                    <p>No projects yet</p>
+                <div class="projects-list" id="recent-list">
+                    <div class="empty-state">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.2; margin-bottom: 15px;"><path d="m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.7.9H18a2 2 0 0 1 2 2v2"/></svg>
+                        <p>No projects yet</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="fab-container">
             <button class="fab" onclick="showScreen('new-project-screen')">
-                <i data-lucide="plus"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
             </button>
         </div>
     </div>
@@ -86,35 +90,45 @@
     <div id="new-project-screen" class="screen">
         <div class="top-bar">
             <button class="icon-btn" onclick="showScreen('home-screen')">
-                <i data-lucide="chevron-left"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             </button>
             <h2>New Project</h2>
             <div style="width: 40px;"></div>
         </div>
         <div class="content">
+            <div class="section-label">Select Preset</div>
             <div class="preset-grid">
                 <div class="preset-item active" onclick="setPreset(1080, 1080, this)">
-                    <i data-lucide="square"></i>
+                    <div class="preset-icon-bg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/></svg>
+                    </div>
                     <p>Instagram Post</p>
                     <span>1080 x 1080</span>
                 </div>
                 <div class="preset-item" onclick="setPreset(1080, 1920, this)">
-                    <i data-lucide="smartphone"></i>
+                    <div class="preset-icon-bg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+                    </div>
                     <p>Story / Reel</p>
                     <span>1080 x 1920</span>
                 </div>
                 <div class="preset-item" onclick="setPreset(1280, 720, this)">
-                    <i data-lucide="youtube"></i>
+                    <div class="preset-icon-bg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17Z"/><path d="m10 15 5-3-5-3z"/></svg>
+                    </div>
                     <p>YouTube Thumbnail</p>
                     <span>1280 x 720</span>
                 </div>
                 <div class="preset-item" onclick="setPreset(1920, 1080, this)">
-                    <i data-lucide="monitor"></i>
+                    <div class="preset-icon-bg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+                    </div>
                     <p>Wallpaper</p>
                     <span>1920 x 1080</span>
                 </div>
             </div>
             
+            <div class="section-label">Custom Size</div>
             <div class="custom-size">
                 <h4>Custom Size</h4>
                 <div class="input-row">
@@ -133,25 +147,25 @@
         <div class="editor-top-bar">
             <div class="left-tools">
                 <button class="icon-btn" onclick="confirmExit()">
-                    <i data-lucide="x"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
                 <div class="divider"></div>
                 <button class="icon-btn" onclick="undo()">
-                    <i data-lucide="undo-2"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
                 </button>
                 <button class="icon-btn" onclick="redo()">
-                    <i data-lucide="redo-2"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"/></svg>
                 </button>
             </div>
             <div class="right-tools">
                 <button class="icon-btn" onclick="toggleLayers()">
-                    <i data-lucide="layers"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
                 </button>
                 <button class="icon-btn" onclick="toggleGrid()">
-                    <i data-lucide="grid-3x3"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
                 </button>
                 <button class="primary-btn-sm" onclick="showExport()">
-                    <i data-lucide="download"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
                     <span>Export</span>
                 </button>
             </div>
@@ -169,19 +183,19 @@
         <div class="bottom-toolbar">
             <div class="tool-tabs">
                 <button class="tool-tab active" onclick="switchTool('text')">
-                    <i data-lucide="type"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg>
                     <span>Text</span>
                 </button>
                 <button class="tool-tab" onclick="switchTool('image')">
-                    <i data-lucide="image"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
                     <span>Image</span>
                 </button>
                 <button class="tool-tab" onclick="switchTool('shapes')">
-                    <i data-lucide="shapes"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.3 10a.7.7 0 0 1-.626-1.079L11.432 2.6a.7.7 0 0 1 1.136 0l3.758 6.321A.7.7 0 0 1 15.7 10Z"/><rect width="7" height="7" x="14" y="14" rx="1"/><circle cx="6.5" cy="17.5" r="3.5"/></svg>
                     <span>Shapes</span>
                 </button>
                 <button class="tool-tab" onclick="switchTool('bg')">
-                    <i data-lucide="palette"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.6-.7 1.6-1.6 0-.4-.2-.8-.5-1.1-.3-.3-.4-.7-.4-1.1 0-.9.7-1.6 1.6-1.6H19c2.8 0 5-2.2 5-5 0-5.5-4.5-10-10-10Z"/></svg>
                     <span>Background</span>
                 </button>
             </div>
@@ -190,32 +204,32 @@
             <div class="tool-panel" id="text-panel">
                 <div class="scroll-row">
                     <button class="panel-item" onclick="addText()">
-                        <i data-lucide="plus"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                         <span>Add Text</span>
                     </button>
                     <div class="divider-v"></div>
                     <button class="panel-item" onclick="openBottomSheet('font-sheet')">
-                        <i data-lucide="font"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
                         <span>Font</span>
                     </button>
                     <button class="panel-item" onclick="openBottomSheet('color-sheet')">
-                        <i data-lucide="droplet"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 22 5-5"/><path d="M9 2C4 2 2 4 2 9s2 7 7 7 7-2 7-7-2-7-7-7Z"/><path d="M12 9h.01"/><path d="M10 12h.01"/><path d="M8 9h.01"/><path d="m19 7-8 8"/><path d="m20 12-4 4"/><path d="m22 10-6 6"/></svg>
                         <span>Color</span>
                     </button>
                     <button class="panel-item" onclick="openBottomSheet('style-sheet')">
-                        <i data-lucide="bold"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M4 15h2"/><path d="M10 15h2"/><path d="M16 15h2"/><path d="M22 15h-2"/><path d="M12 21v-2"/><path d="M12 3v2"/><path d="M12 15v-2"/><path d="m20 20-1.5-1.5"/><path d="M5.5 5.5 4 4"/><path d="m20 4-1.5 1.5"/><path d="M5.5 18.5 4 20"/></svg>
                         <span>Style</span>
                     </button>
                     <button class="panel-item" onclick="openBottomSheet('effects-sheet')">
-                        <i data-lucide="sparkles"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                         <span>Effects</span>
                     </button>
                     <button class="panel-item" onclick="openBottomSheet('spacing-sheet')">
-                        <i data-lucide="align-justify"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10H3"/><path d="M21 6H3"/><path d="M21 14H3"/><path d="M21 18H3"/></svg>
                         <span>Spacing</span>
                     </button>
                     <button class="panel-item" onclick="openBottomSheet('3d-sheet')">
-                        <i data-lucide="box"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" x2="12" y1="22" y2="12"/></svg>
                         <span>3D Text</span>
                     </button>
                 </div>
@@ -224,15 +238,15 @@
             <div class="tool-panel hidden" id="image-panel">
                 <div class="scroll-row">
                     <button class="panel-item" onclick="importImage()">
-                        <i data-lucide="upload"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
                         <span>Import</span>
                     </button>
                     <button class="panel-item" onclick="addSticker()">
-                        <i data-lucide="smile"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
                         <span>Stickers</span>
                     </button>
                     <button class="panel-item" onclick="cropImage()">
-                        <i data-lucide="crop"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg>
                         <span>Crop</span>
                     </button>
                 </div>
@@ -303,37 +317,41 @@
     <div id="export-screen" class="screen">
         <div class="top-bar">
             <button class="icon-btn" onclick="hideExport()">
-                <i data-lucide="chevron-left"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             </button>
             <h2>Export Image</h2>
             <div style="width: 40px;"></div>
         </div>
-        <div class="export-preview-container">
-            <div id="export-preview"></div>
-        </div>
-        <div class="export-options">
-            <div class="option-group">
-                <label>Format</label>
-                <div class="toggle-group">
-                    <button class="toggle-btn active" onclick="setExportFormat('png')">PNG</button>
-                    <button class="toggle-btn" onclick="setExportFormat('jpg')">JPG</button>
-                </div>
+        <div class="content">
+            <div class="export-preview-container">
+                <div id="export-preview"></div>
             </div>
-            <div class="option-group">
-                <label>Quality</label>
-                <div class="toggle-group">
-                    <button class="toggle-btn" onclick="setExportQuality('medium')">Medium</button>
-                    <button class="toggle-btn active" onclick="setExportQuality('high')">Ultra HD</button>
+            <div class="export-options">
+                <div class="option-group">
+                    <label>Format</label>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" onclick="setExportFormat('png')">PNG</button>
+                        <button class="toggle-btn" onclick="setExportFormat('jpg')">JPG</button>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="action-row">
-                <button class="secondary-btn" onclick="shareProject()">
-                    <i data-lucide="share-2"></i> Share
-                </button>
-                <button class="primary-btn" onclick="saveToGallery()">
-                    <i data-lucide="download"></i> Save to Gallery
-                </button>
+                <div class="option-group">
+                    <label>Quality</label>
+                    <div class="toggle-group">
+                        <button class="toggle-btn" onclick="setExportQuality('medium')">Medium</button>
+                        <button class="toggle-btn active" onclick="setExportQuality('high')">Ultra HD</button>
+                    </div>
+                </div>
+                
+                <div class="action-row">
+                    <button class="secondary-btn" onclick="shareProject()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/></svg>
+                        <span>Share</span>
+                    </button>
+                    <button class="primary-btn" onclick="saveToGallery()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                        <span>Save to Gallery</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -342,37 +360,39 @@
     <div id="settings-screen" class="screen">
         <div class="top-bar">
             <button class="icon-btn" onclick="showScreen('home-screen')">
-                <i data-lucide="chevron-left"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             </button>
             <h2>Settings</h2>
             <div style="width: 40px;"></div>
         </div>
-        <div class="settings-list">
-            <div class="setting-item">
-                <div class="setting-info">
-                    <i data-lucide="moon"></i>
-                    <span>Dark Mode</span>
+        <div class="content">
+            <div class="settings-list">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                        <span>Dark Mode</span>
+                    </div>
+                    <div class="switch active"></div>
                 </div>
-                <div class="switch active"></div>
-            </div>
-            <div class="setting-item">
-                <div class="setting-info">
-                    <i data-lucide="magnet"></i>
-                    <span>Auto Snap</span>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.5 7.5 3 3L11 15l-3-3 4.5-4.5Z"/><path d="m9.1 12.9-2.2 2.2c-.8.8-.8 2.1 0 2.9s2.1.8 2.9 0l2.2-2.2"/><path d="m14.9 7.1 2.2-2.2c.8-.8 2.1-.8 2.9 0s.8 2.1 0 2.9l-2.2 2.2"/></svg>
+                        <span>Auto Snap</span>
+                    </div>
+                    <div class="switch active"></div>
                 </div>
-                <div class="switch active"></div>
-            </div>
-            <div class="setting-item">
-                <div class="setting-info">
-                    <i data-lucide="languages"></i>
-                    <span>Hindi Auto-Convert</span>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+                        <span>Hindi Auto-Convert</span>
+                    </div>
+                    <div class="switch active"></div>
                 </div>
-                <div class="switch active"></div>
-            </div>
-            <div class="setting-item" onclick="clearCache()">
-                <div class="setting-info">
-                    <i data-lucide="trash-2"></i>
-                    <span>Clear Cache</span>
+                <div class="setting-item" onclick="clearCache()">
+                    <div class="setting-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                        <span>Clear Cache</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -382,25 +402,27 @@
     <div id="help-screen" class="screen">
         <div class="top-bar">
             <button class="icon-btn" onclick="showScreen('home-screen')">
-                <i data-lucide="chevron-left"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             </button>
             <h2>Help & About</h2>
             <div style="width: 40px;"></div>
         </div>
-        <div class="help-content">
-            <div class="about-card">
-                <i data-lucide="layers" class="about-logo"></i>
-                <h3>PixelLab Pro</h3>
-                <p>Version 2.0.0 (Modern Edition)</p>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <h5>How to add Hindi text?</h5>
-                    <p>Just type in Hindi normally. If you select a legacy font like KrutiDev, the app will automatically convert it for you.</p>
+        <div class="content">
+            <div class="help-content">
+                <div class="about-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="about-logo"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+                    <h3>PixelLab Pro</h3>
+                    <p>Version 2.0.0 (Modern Edition)</p>
                 </div>
-                <div class="faq-item">
-                    <h5>Where are my projects saved?</h5>
-                    <p>Projects are saved in your internal storage. Exported images go to your Gallery.</p>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h5>How to add Hindi text?</h5>
+                        <p>Just type in Hindi normally. If you select a legacy font like KrutiDev, the app will automatically convert it for you.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h5>Where are my projects saved?</h5>
+                        <p>Projects are saved in your internal storage. Exported images go to your Gallery.</p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -26,8 +26,16 @@ window.onload = () => {
 
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(screenId).classList.add('active');
-    currentScreen = screenId;
+    const target = document.getElementById(screenId);
+    if (target) {
+        target.classList.add('active');
+        currentScreen = screenId;
+        
+        // Re-initialize icons for the new screen
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    }
 }
 
 function setPreset(w, h, el) {
