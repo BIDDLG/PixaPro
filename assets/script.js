@@ -284,6 +284,58 @@ function importImage() {
     input.click();
 }
 
+// Font Upload
+function uploadFont() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.ttf,.otf,.woff,.woff2';
+    input.onchange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        // Sanitize font name to avoid CSS issues
+        const fontName = file.name.split('.')[0].replace(/[^a-zA-Z0-9]/g, '_');
+        const fontUrl = URL.createObjectURL(file);
+        const fontFace = new FontFace(fontName, `url(${fontUrl})`);
+        
+        try {
+            const loadedFace = await fontFace.load();
+            document.fonts.add(loadedFace);
+            
+            // Add to font list in UI
+            const fontList = document.getElementById('font-list');
+            const fontItem = document.createElement('div');
+            fontItem.className = 'font-item';
+            fontItem.style.fontFamily = fontName;
+            fontItem.innerHTML = `
+                <span>${fontName}</span>
+                <i data-lucide="check" class="hidden"></i>
+            `;
+            fontItem.onclick = () => applyFont(fontName);
+            fontList.prepend(fontItem);
+            
+            lucide.createIcons();
+            alert(`Font "${fontName}" added successfully!`);
+            
+            // Cleanup URL after loading
+            URL.revokeObjectURL(fontUrl);
+        } catch (err) {
+            console.error("Font loading failed:", err);
+            alert("Failed to load font. Please ensure it's a valid font file (.ttf, .otf, .woff).");
+            URL.revokeObjectURL(fontUrl);
+        }
+    };
+    input.click();
+}
+
+function applyFont(fontName) {
+    const obj = canvas.getActiveObject();
+    if (obj && obj.type === 'i-text') {
+        obj.set('fontFamily', fontName);
+        canvas.renderAll();
+    }
+}
+
 // Color Presets
 const colors = ['#ffffff', '#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#8b5cf6', '#06b6d4'];
 const colorGrid = document.getElementById('preset-colors');
@@ -302,5 +354,56 @@ function applyColor(color) {
     if (obj) {
         obj.set('fill', color);
         canvas.renderAll();
+    }
+}
+
+// Missing Functions
+function openGallery() {
+    importImage(); // Reuse importImage for gallery access
+}
+
+function addSticker() {
+    alert("Stickers feature coming soon!");
+}
+
+function cropImage() {
+    alert("Crop feature coming soon!");
+}
+
+function switchColorMode(mode) {
+    document.querySelectorAll('.color-tab').forEach(t => t.classList.remove('active'));
+    const tab = Array.from(document.querySelectorAll('.color-tab')).find(t => t.innerText.toLowerCase().includes(mode));
+    if (tab) tab.classList.add('active');
+    
+    if (mode === 'gradient') {
+        alert("Gradient mode coming soon!");
+    }
+}
+
+function setExportFormat(format) {
+    exportFormat = format;
+    document.querySelectorAll('.toggle-btn').forEach(b => {
+        if (b.innerText.toLowerCase() === format) b.classList.add('active');
+        else if (b.innerText.toLowerCase() !== 'medium' && b.innerText.toLowerCase() !== 'ultra hd') b.classList.remove('active');
+    });
+    showExport(); // Refresh preview
+}
+
+function setExportQuality(quality) {
+    if (quality === 'medium') exportQuality = 0.5;
+    else exportQuality = 1.0;
+    
+    document.querySelectorAll('.toggle-btn').forEach(b => {
+        if (b.innerText.toLowerCase().includes(quality)) b.classList.add('active');
+        else if (b.innerText.toLowerCase() === 'medium' || b.innerText.toLowerCase() === 'ultra hd') b.classList.remove('active');
+    });
+    showExport(); // Refresh preview
+}
+
+function clearCache() {
+    if (confirm("Are you sure you want to clear all project data?")) {
+        localStorage.clear();
+        alert("Cache cleared!");
+        location.reload();
     }
 }
