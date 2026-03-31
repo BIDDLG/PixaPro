@@ -289,41 +289,47 @@ function uploadFont() {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.ttf,.otf,.woff,.woff2';
-    input.onchange = async (e) => {
+    input.onchange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
         
         // Sanitize font name to avoid CSS issues
         const fontName = file.name.split('.')[0].replace(/[^a-zA-Z0-9]/g, '_');
-        const fontUrl = URL.createObjectURL(file);
-        const fontFace = new FontFace(fontName, `url(${fontUrl})`);
+        const reader = new FileReader();
         
-        try {
-            const loadedFace = await fontFace.load();
-            document.fonts.add(loadedFace);
+        reader.onload = async (f) => {
+            const fontDataUrl = f.target.result;
+            const fontFace = new FontFace(fontName, `url(${fontDataUrl})`);
             
-            // Add to font list in UI
-            const fontList = document.getElementById('font-list');
-            const fontItem = document.createElement('div');
-            fontItem.className = 'font-item';
-            fontItem.style.fontFamily = fontName;
-            fontItem.innerHTML = `
-                <span>${fontName}</span>
-                <i data-lucide="check" class="hidden"></i>
-            `;
-            fontItem.onclick = () => applyFont(fontName);
-            fontList.prepend(fontItem);
-            
-            lucide.createIcons();
-            alert(`Font "${fontName}" added successfully!`);
-            
-            // Cleanup URL after loading
-            URL.revokeObjectURL(fontUrl);
-        } catch (err) {
-            console.error("Font loading failed:", err);
-            alert("Failed to load font. Please ensure it's a valid font file (.ttf, .otf, .woff).");
-            URL.revokeObjectURL(fontUrl);
-        }
+            try {
+                const loadedFace = await fontFace.load();
+                document.fonts.add(loadedFace);
+                
+                // Add to font list in UI
+                const fontList = document.getElementById('font-list');
+                const fontItem = document.createElement('div');
+                fontItem.className = 'font-item';
+                fontItem.style.fontFamily = fontName;
+                fontItem.innerHTML = `
+                    <span>${fontName}</span>
+                    <i data-lucide="check" class="hidden"></i>
+                `;
+                fontItem.onclick = () => applyFont(fontName);
+                fontList.prepend(fontItem);
+                
+                lucide.createIcons();
+                alert(`Font "${fontName}" added successfully!`);
+            } catch (err) {
+                console.error("Font loading failed:", err);
+                alert("Failed to load font. Please ensure it's a valid font file (.ttf, .otf, .woff).");
+            }
+        };
+        
+        reader.onerror = () => {
+            alert("Error reading file. Please try again.");
+        };
+        
+        reader.readAsDataURL(file);
     };
     input.click();
 }
